@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <time.h>
+int binarySearch(int arr[], int n, int target) {
+    int left = 0, right = n - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            return mid; // Target found, return its index
+        } else if (arr[mid] < target) {
+            left = mid + 1; // Search in the right half
+        } else {
+            right = mid - 1; // Search in the left half
+        }
+    }
+
+    return -1; // Target not found
+}
+
+int main() {
+    int n, target;
+
+    // Input the size of the array
+    printf("Enter the size of the sorted array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Input the sorted elements of the array
+    printf("Enter the sorted elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Input the target number to search
+    printf("Enter the target number to search: ");
+    scanf("%d", &target);
+
+    // Measure the start time
+    clock_t start_time = clock();
+
+    // Perform binary search
+    int result = binarySearch(arr, n, target);
+
+    // Measure the end time
+    clock_t end_time = clock();
+
+    // Calculate the time taken
+    double time_taken = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+
+    // Display the result and time taken
+    if (result != -1) {
+        printf("Target found at index: %d\n", result);
+    } else {
+        printf("Target not found in the array\n");
+    }
+
+    printf("Time taken: %f seconds\n", time_taken);
+
+    return 0;
+}
